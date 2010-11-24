@@ -1,7 +1,8 @@
 <?php
 
 defined('DEFAULT_CONTROLLERS_PATH') or
-  define('DEFAULT_CONTROLLERS_PATH', dirname(__FILE__) . '/../controllers/');
+  define('DEFAULT_CONTROLLERS_PATH',
+         dirname(__FILE__) . '/../app/controllers/');
 
 define('DEFAULT_CONTROLLER_SUFFIX', '_controller.php');
 define('DEFAULT_CONTROLLERS_FORMAT', 'html');
