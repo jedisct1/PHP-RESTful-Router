@@ -3,11 +3,11 @@
 class Controller
 {
     
-    /* 
-     * /test2.php/show/4269.json
-     * /test2.php/show/4269.jsonp?jsonp=_JSONP_callback_name
-     * /test2.php/show/4269.igb
-     * /test2.php/show/4269.phpser
+    /* GET
+     * /test2.php/things/4269.json
+     * /test2.php/things/4269.jsonp?jsonp=_JSONP_callback_name
+     * /test2.php/things/4269.igb
+     * /test2.php/things/4269.phpser
      */
     
     static function show($id) {
@@ -29,7 +29,12 @@ class Controller
                      'error_message' => '');
     }
 
-    // Ditto with the POST verb
+    /* POST
+     * /test2.php/things.json
+     * /test2.php/things.jsonp?jsonp=_JSONP_callback_name
+     * /test2.php/things.igb
+     * /test2.php/things.phpser
+     */
     
     static function create() {
         return array('return_code' => 1,

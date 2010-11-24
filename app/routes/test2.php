@@ -3,22 +3,22 @@
 require_once '../lib/bootstrap.inc.php';
 
 Route::map_connect(array('controller' => 'test2',
-                         'path' => '/items/:id',
+                         'path' => '/things/:id',
                          'method' => 'GET',
                          'action' => 'show'));
 
 Route::map_connect(array('controller' => 'test2',
-                         'path' => '/items/:id',
+                         'path' => '/things/:id',
                          'method' => 'DELETE',
                          'action' => 'delete'));
 
 Route::map_connect(array('controller' => 'test2',
-                         'path' => '/items/:id',
-                         'method' => 'PUT',
+                         'path' => '/things/:id',
+                         'method' => 'DELETE',
                          'action' => 'update'));
 
 Route::map_connect(array('controller' => 'test2',
-                         'path' => '/items',
+                         'path' => '/things',
                          'method' => 'POST',
                          'action' => 'create'));
 
