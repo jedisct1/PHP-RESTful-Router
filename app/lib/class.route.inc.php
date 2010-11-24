@@ -220,20 +220,6 @@ class Route {
 
     public
 
-    static function pluralize($string) {
-        if (strcasecmp(substr($string, -1), 's') === 0) {
-            return $string . 'es';
-        }
-        return $string . 's';
-    }
-
-    static function singularize($string) {
-        if (strcasecmp(substr($string, -1), 's') !== 0) {
-            return $string;
-        }
-        return substr($string, 0, strlen($string));
-    }
-
     static function map_connect($params) {
         $extra_params = $params;
         foreach (array('path', 'controller', 'action', 'method') as $key) {
@@ -252,50 +238,45 @@ class Route {
     }
 
     static function map_resources($params) {
-        $plural_name = $params['resource'];
-        if (empty($params['singular'])) {
-            $singular_name = self::singularize($plural_name);
-        } else {
-            $singular_name = $params['singular'];
-        }
+        $resource_name = $params['resource'];
         if (empty($params['path_prefix'])) {
             $path_prefix = '/';
         } else {
             $path_prefix = $params['path_prefix'];
         }
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name . '/new',
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name . '/new',
                  'method' => 'GET',
                  'action' => 'new'));
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name . '/:id;edit',
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name . '/:id;edit',
                  'method' => 'GET',
                  'action' => 'edit'));
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name . '/:id',
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name . '/:id',
                  'method' => 'GET',
                  'action' => 'show'));
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name . '/:id',
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name . '/:id',
                  'method' => 'PUT',
                  'action' => 'update'));
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name . '/:id',
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name . '/:id',
                  'method' => 'DELETE',
                  'action' => 'delete'));
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name,
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name,
                  'method' => 'POST',
                  'action' => 'create'));
         self::map_connect
-          (array('controller' => $plural_name,
-                 'path' => $path_prefix . $plural_name,
+          (array('controller' => $resource_name,
+                 'path' => $path_prefix . $resource_name,
                  'method' => 'GET',
                  'action' => 'index'));
     }
