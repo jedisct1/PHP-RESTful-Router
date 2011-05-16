@@ -26,7 +26,6 @@ class Route {
     static $controller_suffix = DEFAULT_CONTROLLER_SUFFIX;
 
     protected
-
     static function _examine_splitted_path_component($params) {
         $found_action = FALSE;
         $found_params = array();
@@ -78,6 +77,7 @@ class Route {
                      'found_params' => $found_params);
     }
 
+    protected
     static function _examine_splitted_paths($params) {
         $action = FALSE;
         $extra_params = array();
@@ -114,6 +114,7 @@ class Route {
                      'extra_params' => $extra_params);
     }
 
+    protected
     static function _init_params() {
         $g = $_GET;
         $p = $_POST;
@@ -136,6 +137,7 @@ class Route {
         }
     }
 
+    protected
     static function _handle_put_data_multipart($boundary) {
         $data = file_get_contents("php://input");
         if (empty($data)) {
@@ -170,6 +172,7 @@ class Route {
         }
     }
 
+    protected
     static function _handle_put_data_urlencoded() {
         $data = file_get_contents("php://input");
         if (empty($data)) {
@@ -191,6 +194,7 @@ class Route {
         }
     }
 
+    protected
     static function _handle_put_data() {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT') !== 0 ||
             ($content_type = @$_SERVER['CONTENT_TYPE']) === '' ||
@@ -213,6 +217,7 @@ class Route {
         return TRUE;
     }
 
+    protected
     static function _handle_json_encoded_data() {
         if (empty($_SERVER['CONTENT_TYPE'])) {
             return FALSE;
@@ -242,14 +247,13 @@ class Route {
         return TRUE;
     }
     
+    protected
     static function _output($content_type, $encoded_content) {
         header('Content-Type: ' . $content_type . '; charset=utf-8');
         header('Content-Length: ' . strlen($encoded_content));
         echo $encoded_content;
         flush();
     }
-
-    public
 
     static function map_connect($params) {
         $extra_params = $params;
