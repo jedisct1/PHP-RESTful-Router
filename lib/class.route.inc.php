@@ -475,8 +475,14 @@ class Route {
                 echo '<h1>400 - Invalid JSON-P callback name</h1>';
                 die();
             }
-            self::_output('text/javascript',
-                          $jsonp_cb . '(' . json_encode($ret) . ');');
+            $ret = json_encode($ret);
+
+            # Unicode chars 0x2028 and 0x2029 are valid JSON but not valid JS
+            # They need to be encoded as \uABCD for JSON-P.
+            
+            $ret = str_replace("\xe2\x80\xa8", '\\u2028', $ret);
+            $ret = str_replace("\xe2\x80\xa9", '\\u2029', $ret);
+            self::_output('text/javascript', $jsonp_cb . '(' . $ret . ');');
             return TRUE;
          case 'html':
             if (empty($_SERVER['PROD'])) {
